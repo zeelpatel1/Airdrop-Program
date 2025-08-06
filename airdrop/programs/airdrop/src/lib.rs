@@ -12,6 +12,8 @@ pub mod airdrop {
         let to_pubkey=ctx.accounts.recipient.to_account_info();
         let program_id=ctx.accounts.system_program.to_account_info();
 
+        // creating the instruction data
+        // which will hold the program_id,accounts,data
         let cpi_context=CpiContext::new(
             program_id,
             Transfer{
@@ -19,6 +21,7 @@ pub mod airdrop {
                 to:to_pubkey,
             },
         );
+        
         transfer(cpi_context,amount)?;
 
         Ok(())
